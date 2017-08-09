@@ -38,7 +38,7 @@ function run() {
         if(row.length === 2) {
             console.log(ip);
             set_proxy(row[0], row[1]);
-            chrome.tabs.reload(cur_tab, null, function() {});
+            chrome.tabs.update(cur_tab, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function() {});
         }
     } else {
         get_ips();
