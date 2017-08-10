@@ -16,6 +16,6 @@
    "minimum_chrome_version": "1.0.0",
    "name": "proxys",
    "options_page": "options.html",
-   "permissions": [ "proxy", "tabs", "http://*/*", "https://*/*", "ftp://*/*" ],
+   "permissions": [ "proxy", "tabs", "cookies", "http://*/*", "https://*/*", "ftp://*/*" ],
    "version": "1.0.0"
 }
