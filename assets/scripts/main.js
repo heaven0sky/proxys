@@ -38,6 +38,12 @@ function run() {
         if(row.length === 2) {
             console.log(ip);
             set_proxy(row[0], row[1]);
+            chrome.cookies.getAll({url:"http://www.hao123.com/?tn=90384165_hao_pg"}, function(cookies) {
+                for(var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    chrome.cookies.remove({url:"http://www.hao123.com/?tn=90384165_hao_pg", name: cookie.name}, function() {});
+                }
+            });
             chrome.tabs.update(cur_tab, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function() {});
         }
     } else {
