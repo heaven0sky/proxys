@@ -12,8 +12,6 @@ function init() {
 }
 
 function run() {
-    if(cur_tab !== null)
-        chrome.tabs.remove(cur_tab, function(){});
     chrome.tabs.executeScript(ly_tab,{
         code: "var btn = document.getElementById('disconnect');btn.click();"
     });
@@ -28,6 +26,8 @@ function lianjie() {
 }
 
 function reload() {
+    if(cur_tab !== null)
+        chrome.tabs.remove(cur_tab, function(){});
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){
         cur_tab = tab.id;
     });
