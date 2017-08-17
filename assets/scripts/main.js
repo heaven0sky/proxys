@@ -9,6 +9,7 @@ function init() {
         ly_tab = tab.id;
     });
     setInterval(run,20000);
+    //setInterval(reload, 5000);
 }
 
 function run() {
@@ -22,7 +23,6 @@ function lianjie() {
     chrome.tabs.executeScript(ly_tab,{
         code: "var btn = document.getElementById('save');btn.click();"
     });
-    setTimeout("reload()", 5000);
 }
 
 function reload() {
