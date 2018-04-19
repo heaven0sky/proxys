@@ -25,7 +25,7 @@ function init() {
         cur_tab = tab.id;
     });
 
-    setInterval(run, 40000);
+    setInterval(run, 5000);
 }
 
 function run() {
