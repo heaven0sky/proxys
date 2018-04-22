@@ -16,7 +16,7 @@
  along with SwitchySharp.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var api_url = "http://piping.mogumiao.com/proxy/api/get_ip_bs?appKey=019287c4b45146ea9cbcb8d2b6afc885&count=10&expiryDate=0&format=2"
+var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
 var cur_tab;
 function init() {
@@ -56,7 +56,7 @@ function set_proxy(ip, port) {
                 host: ip,
                 port: parseInt(port)
             },
-            bypassList: ["*mogumiao.com"]
+            bypassList: ["127.0.0.1"]
         }
     };
     chrome.proxy.settings.set(
@@ -79,9 +79,7 @@ function get_ips() {
         var arrayOfLines = result.match(/[^\r\n]+/g);
         for(var i = 0; i < arrayOfLines.length; i++) {
             var line = arrayOfLines[i];
-            if(!line.startsWith('E')){
-                ips.push(line);
-            }
+            ips.push(line);
         }
     });
 }
