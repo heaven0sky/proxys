@@ -41,7 +41,7 @@ function run() {
                     chrome.cookies.remove({url:"http://www.hao123.com/?tn=90384165_hao_pg", name: cookie.name}, function() {});
                 }
             });
-            chrome.tabs.update(cur_tab, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function() {});
+            chrome.tabs.reload(cur_tab, null, function() {});
         }
     } else {
         get_ips();
