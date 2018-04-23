@@ -29,6 +29,9 @@ function init() {
 }
 
 function run() {
+    if (is_get_ips) {
+        return
+    }
     if (ips.length > 0) {
         var ip = ips.pop();
         var row = ip.split(":");
@@ -73,17 +76,21 @@ function use_system_proxy() {
         function() {});
 }
 
+var is_get_ips = false;
+
 function get_ips() {
     use_system_proxy();
+    is_get_ips = true
     $.ajax({
         url: api_url,
         success: function(result){
+            is_get_ips = false;
             var arrayOfLines = result.match(/[^\r\n]+/g);
             for(var i = 0; i < arrayOfLines.length; i++) {
                 var line = arrayOfLines[i];
                 ips.push(line);
             }
-        },
+        }
         timeout: 4000 //in milliseconds
     });
 }
