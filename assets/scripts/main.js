@@ -90,7 +90,7 @@ function get_ips() {
                 var line = arrayOfLines[i];
                 ips.push(line);
             }
-        }
+        },
         timeout: 4000 //in milliseconds
     });
 }
