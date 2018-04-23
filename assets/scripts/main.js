@@ -19,9 +19,10 @@
 var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
 var cur_tab;
+
 function init() {
     get_ips();
-    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){
+    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
         cur_tab = tab.id;
     });
 
@@ -32,16 +33,21 @@ function run() {
     if (ips.length > 0) {
         var ip = ips.pop();
         var row = ip.split(":");
-        if(row.length === 2) {
+        if (row.length === 2) {
             console.log(ip);
             set_proxy(row[0], row[1]);
-            chrome.cookies.getAll({url:"http://www.hao123.com/?tn=90384165_hao_pg"}, function(cookies) {
-                for(var i = 0; i < cookies.length; i++) {
+            chrome.cookies.getAll({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (cookies) {
+                for (var i = 0; i < cookies.length; i++) {
                     var cookie = cookies[i];
-                    chrome.cookies.remove({url:"http://www.hao123.com/?tn=90384165_hao_pg", name: cookie.name}, function() {});
+                    chrome.cookies.remove({
+                        url: "http://www.hao123.com/?tn=90384165_hao_pg",
+                        name: cookie.name
+                    }, function () {
+                    });
                 }
             });
-            chrome.tabs.reload(cur_tab, null, function() {});
+            chrome.tabs.reload(cur_tab, null, function () {
+            });
         }
     } else {
         get_ips();
@@ -61,7 +67,8 @@ function set_proxy(ip, port) {
     };
     chrome.proxy.settings.set(
         {value: config, scope: 'regular'},
-        function() {});
+        function () {
+        });
 }
 
 function use_system_proxy() {
@@ -70,16 +77,17 @@ function use_system_proxy() {
     };
     chrome.proxy.settings.set(
         {value: config, scope: 'regular'},
-        function() {});
+        function () {
+        });
 }
 
 function get_ips() {
     use_system_proxy();
     $.ajax({
         url: api_url,
-        success: function(result){
+        success: function (result) {
             var arrayOfLines = result.match(/[^\r\n]+/g);
-            for(var i = 0; i < arrayOfLines.length; i++) {
+            for (var i = 0; i < arrayOfLines.length; i++) {
                 var line = arrayOfLines[i];
                 ips.push(line);
             }
@@ -88,8 +96,8 @@ function get_ips() {
     });
 }
 
-$(document).ready(function(){
-    chrome.browserAction.onClicked.addListener(function(){
+$(document).ready(function () {
+    chrome.browserAction.onClicked.addListener(function () {
         init();
     });
 });
