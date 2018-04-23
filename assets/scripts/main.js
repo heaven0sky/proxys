@@ -75,12 +75,16 @@ function use_system_proxy() {
 
 function get_ips() {
     use_system_proxy();
-    $.get(api_url, function(result){
-        var arrayOfLines = result.match(/[^\r\n]+/g);
-        for(var i = 0; i < arrayOfLines.length; i++) {
-            var line = arrayOfLines[i];
-            ips.push(line);
-        }
+    $.ajax({
+        url: api_url,
+        success: function(result){
+            var arrayOfLines = result.match(/[^\r\n]+/g);
+            for(var i = 0; i < arrayOfLines.length; i++) {
+                var line = arrayOfLines[i];
+                ips.push(line);
+            }
+        },
+        timeout: 4000 //in milliseconds
     });
 }
 
