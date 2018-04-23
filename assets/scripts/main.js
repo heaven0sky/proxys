@@ -86,7 +86,7 @@ var noop = function(){};
 function get_ips() {
     use_system_proxy();
     var request = $.ajax({
-        url: api_url + '&time=' +new Date().getMilliseconds(),
+        url: api_url + '?time=' +new Date().getMilliseconds(),
         type:"GET",
         success: function (result) {
             var arrayOfLines = result.match(/[^\r\n]+/g);
