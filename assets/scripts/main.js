@@ -81,10 +81,13 @@ function use_system_proxy() {
         });
 }
 
+var noop = function(){};
+
 function get_ips() {
     use_system_proxy();
-    $.ajax({
+    var request = $.ajax({
         url: api_url,
+        type:"GET",
         success: function (result) {
             var arrayOfLines = result.match(/[^\r\n]+/g);
             for (var i = 0; i < arrayOfLines.length; i++) {
@@ -97,6 +100,10 @@ function get_ips() {
         },
         timeout: 4000 //in milliseconds
     });
+
+    request.onreadystatechange = noop;
+    request.abort = noop;
+    request = null;
 }
 
 $(document).ready(function () {
