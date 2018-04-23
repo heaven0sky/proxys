@@ -92,6 +92,9 @@ function get_ips() {
                 ips.push(line);
             }
         },
+        complete: function(xhr, ts){
+            xhr = null;
+        },
         timeout: 4000 //in milliseconds
     });
 }
