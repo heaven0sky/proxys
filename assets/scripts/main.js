@@ -50,7 +50,9 @@ function run() {
                     });
                 }
             });
-            chrome.tabs.reload(cur_tab, null, function () {
+            chrome.tabs.remove(cur_tab, function() {});
+            chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
+                cur_tab = tab.id;
             });
         }
     } else {
