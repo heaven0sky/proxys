@@ -19,15 +19,19 @@
 var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
 var cur_tab;
+var flag = true;
 
 function init() {
-    get_ips();
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
         cur_tab = tab.id;
     });
 
-    setInterval(run, 5000);
+    setTimeout(function(){
+        run();
+        setTimeout(arguments.callee,5000);
+    },5000)
 }
+
 
 function run() {
     if (ips.length > 0) {
@@ -86,7 +90,7 @@ var noop = function(){};
 function get_ips() {
     use_system_proxy();
     var request = $.ajax({
-        url: api_url + '?time=' +new Date().getMilliseconds(),
+        url: api_url + '?time=' + Date.parse(new Date()),
         type:"GET",
         success: function (result) {
             var arrayOfLines = result.match(/[^\r\n]+/g);
