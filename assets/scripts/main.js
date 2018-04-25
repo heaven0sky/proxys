@@ -16,7 +16,7 @@
  along with SwitchySharp.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var api_url = "http://piping.mogumiao.com/proxy/api/get_ip_bs?appKey=019287c4b45146ea9cbcb8d2b6afc885&count=10&expiryDate=1&format=2"
+var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
 var cur_tab;
 var flag = true;
@@ -62,9 +62,12 @@ function run() {
                 }
             });
             chrome.tabs.reload(cur_tab, function() {});
+<<<<<<< HEAD
             /*chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
                 cur_tab = tab.id;
             });*/
+=======
+>>>>>>> e828641b72111649628d4136a013dd937aaafaaf
         }
     } else {
         get_ips();
@@ -125,5 +128,13 @@ function get_ips() {
 }
 
 $(document).ready(function () {
+<<<<<<< HEAD
     init();
+=======
+    console.log('run');
+    init();
+    /*chrome.browserAction.onClicked.addListener(function () {
+        init();
+    });*/
+>>>>>>> e828641b72111649628d4136a013dd937aaafaaf
 });
