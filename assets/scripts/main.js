@@ -62,12 +62,9 @@ function run() {
                 }
             });
             chrome.tabs.reload(cur_tab, function() {});
-<<<<<<< HEAD
             /*chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
                 cur_tab = tab.id;
             });*/
-=======
->>>>>>> e828641b72111649628d4136a013dd937aaafaaf
         }
     } else {
         get_ips();
@@ -128,13 +125,5 @@ function get_ips() {
 }
 
 $(document).ready(function () {
-<<<<<<< HEAD
     init();
-=======
-    console.log('run');
-    init();
-    /*chrome.browserAction.onClicked.addListener(function () {
-        init();
-    });*/
->>>>>>> e828641b72111649628d4136a013dd937aaafaaf
 });
