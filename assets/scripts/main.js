@@ -110,7 +110,9 @@ function get_ips() {
 }
 
 $(document).ready(function () {
-    chrome.browserAction.onClicked.addListener(function () {
+    console.log('run');
+    init();
+    /*chrome.browserAction.onClicked.addListener(function () {
         init();
-    });
+    });*/
 });
