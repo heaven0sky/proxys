@@ -20,6 +20,7 @@ var api_url = "http://piping.mogumiao.com/proxy/api/get_ip_bs?appKey=019287c4b45
 var ips = [];
 var cur_tab;
 var flag = true;
+var count = 0;
 
 function init() {
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
@@ -27,6 +28,16 @@ function init() {
     });
 
     setTimeout(function(){
+        count += 1;
+        if (count > 120) {
+            count = 0;
+            chrome.windows.getAll(null, function (windows) {
+                for (var i = 0; i < windows.length; i++){
+                    chrome.windows.remove(windows[i].id, function () {});
+                }
+                
+            });
+        }
         run();
         setTimeout(arguments.callee,5000);
     },5000)
@@ -68,7 +79,7 @@ function set_proxy(ip, port) {
                 host: ip,
                 port: parseInt(port)
             },
-            bypassList: ["127.0.0.1"]
+            bypassList: ["127.0.0.1", "*.mogumiao.com"]
         }
     };
     chrome.proxy.settings.set(
@@ -92,7 +103,7 @@ var noop = function(){};
 function get_ips() {
     use_system_proxy();
     var request = $.ajax({
-        url: api_url + '?time=' + Date.parse(new Date()),
+        url: api_url + '&time=' + Date.parse(new Date()),
         type:"GET",
         success: function (result) {
             var arrayOfLines = result.match(/[^\r\n]+/g);
@@ -110,10 +121,9 @@ function get_ips() {
     request.onreadystatechange = noop;
     request.abort = noop;
     request = null;
+
 }
 
 $(document).ready(function () {
-    chrome.browserAction.onClicked.addListener(function () {
-        init();
-    });
+    init();
 });
