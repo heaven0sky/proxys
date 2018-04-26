@@ -29,7 +29,7 @@ function init() {
 
     setTimeout(function(){
         count += 1;
-        if (count > 120) {
+        if (count > 60) {
             count = 0;
             chrome.windows.getAll(null, function (windows) {
                 for (var i = 0; i < windows.length; i++){
