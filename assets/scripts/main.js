@@ -49,7 +49,7 @@ function get_ips() {
         url: api_url + '?time=' + Date.parse(new Date()),
         type:"GET",
         success: function (result) {
-            if (result.length === 1) {
+            if (result.length > 0) {
                 var row = result.split(":");
                 if (row.length === 2) {
                     console.log(result);
