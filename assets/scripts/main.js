@@ -45,7 +45,6 @@ function init() {
 }
 
 function get_ips() {
-    use_system_proxy();
     var request = $.ajax({
         url: api_url + '?time=' + Date.parse(new Date()),
         type:"GET",
@@ -53,8 +52,7 @@ function get_ips() {
             if (result.length === 1) {
                 var row = result.split(":");
                 if (row.length === 2) {
-                    console.log(ip);
-                    set_proxy(row[0], row[1]);
+                    console.log(result);
                     chrome.cookies.getAll({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (cookies) {
                         for (var i = 0; i < cookies.length; i++) {
                             var cookie = cookies[i];
@@ -64,6 +62,7 @@ function get_ips() {
                             }, function () {});
                         }
                     });
+                    set_proxy(row[0], row[1]);
                     chrome.tabs.reload(cur_tab, function() {});
                 }
             }
@@ -71,7 +70,7 @@ function get_ips() {
         complete: function(xhr, ts){
             xhr = null;
         },
-        timeout: 4000 //in milliseconds
+        timeout: 5000 //in milliseconds
     });
 
     request.onreadystatechange = noop;
