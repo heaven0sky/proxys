@@ -37,38 +37,46 @@ function init() {
                 }
                 
             });
+        } else {
+            get_ips();
+            setTimeout(arguments.callee,5000);
         }
-        run();
-        setTimeout(arguments.callee,5000);
     },5000)
 }
 
-
-function run() {
-    if (ips.length > 0) {
-        var ip = ips.pop();
-        var row = ip.split(":");
-        if (row.length === 2) {
-            console.log(ip);
-            set_proxy(row[0], row[1]);
-            chrome.cookies.getAll({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (cookies) {
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
-                    chrome.cookies.remove({
-                        url: "http://www.hao123.com/?tn=90384165_hao_pg",
-                        name: cookie.name
-                    }, function () {
+function get_ips() {
+    use_system_proxy();
+    var request = $.ajax({
+        url: api_url + '?time=' + Date.parse(new Date()),
+        type:"GET",
+        success: function (result) {
+            if (result.length === 1) {
+                var row = result.split(":");
+                if (row.length === 2) {
+                    console.log(ip);
+                    set_proxy(row[0], row[1]);
+                    chrome.cookies.getAll({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (cookies) {
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i];
+                            chrome.cookies.remove({
+                                url: "http://www.hao123.com/?tn=90384165_hao_pg",
+                                name: cookie.name
+                            }, function () {});
+                        }
                     });
+                    chrome.tabs.reload(cur_tab, function() {});
                 }
-            });
-            chrome.tabs.reload(cur_tab, function() {});
-            /*chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
-                cur_tab = tab.id;
-            });*/
-        }
-    } else {
-        get_ips();
-    }
+            }
+        },
+        complete: function(xhr, ts){
+            xhr = null;
+        },
+        timeout: 4000 //in milliseconds
+    });
+
+    request.onreadystatechange = noop;
+    request.abort = noop;
+    request = null;
 }
 
 function set_proxy(ip, port) {
@@ -99,30 +107,6 @@ function use_system_proxy() {
 }
 
 var noop = function(){};
-
-function get_ips() {
-    use_system_proxy();
-    var request = $.ajax({
-        url: api_url + '?time=' + Date.parse(new Date()),
-        type:"GET",
-        success: function (result) {
-            var arrayOfLines = result.match(/[^\r\n]+/g);
-            for (var i = 0; i < arrayOfLines.length; i++) {
-                var line = arrayOfLines[i];
-                ips.push(line);
-            }
-        },
-        complete: function(xhr, ts){
-            xhr = null;
-        },
-        timeout: 4000 //in milliseconds
-    });
-
-    request.onreadystatechange = noop;
-    request.abort = noop;
-    request = null;
-
-}
 
 $(document).ready(function () {
     init();
