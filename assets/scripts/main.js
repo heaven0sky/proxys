@@ -26,7 +26,7 @@ function init() {
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
         cur_tab = tab.id;
     });
-
+    get_ips();
     setTimeout(function(){
         count += 1;
         if (count > 60) {
