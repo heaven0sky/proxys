@@ -35,7 +35,6 @@ function init() {
                 for (var i = 0; i < windows.length; i++){
                     chrome.windows.remove(windows[i].id, function () {});
                 }
-                
             });
         } else {
             get_ips();
