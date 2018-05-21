@@ -28,6 +28,7 @@ function init() {
     });
     get_ips();
     setTimeout(function(){
+<<<<<<< HEAD
         count += 1;
         if (count > 60) {
             count = 0;
@@ -40,6 +41,10 @@ function init() {
             get_ips();
             setTimeout(arguments.callee,5000);
         }
+=======
+        get_ips();
+        setTimeout(arguments.callee,5000);
+>>>>>>> d8fbed1fba1ee34ffe14b8db8d7b0e13fac3ac88
     },5000)
 }
 
