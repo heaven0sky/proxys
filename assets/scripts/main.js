@@ -28,19 +28,8 @@ function init() {
     });
     get_ips();
     setTimeout(function(){
-        count += 1;
-        if (count > 60) {
-            count = 0;
-            chrome.windows.getAll(null, function (windows) {
-                for (var i = 0; i < windows.length; i++){
-                    chrome.windows.remove(windows[i].id, function () {});
-                }
-                
-            });
-        } else {
-            get_ips();
-            setTimeout(arguments.callee,5000);
-        }
+        get_ips();
+        setTimeout(arguments.callee,5000);
     },5000)
 }
 
