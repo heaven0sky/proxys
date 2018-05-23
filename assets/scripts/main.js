@@ -23,8 +23,12 @@ var flag = true;
 var count = 0;
 
 function init() {
-    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
-        cur_tab = tab.id;
+    chrome.tabs.query({},function(tabs){
+        console.log(tabs);
+        if(tabs.length > 0) {
+            cur_tab = tabs[0].id;
+            chrome.tabs.update(cur_tab,{url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
+        }
     });
     get_ips();
     setTimeout(function(){
