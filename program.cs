@@ -20,17 +20,19 @@ namespace RunChrome
             }
             while (true)
             {
-                Thread.Sleep(300000);
+                Thread.Sleep(250000);
 
                 for (var i = 1; i < 12; i++)
                 {
                     var cps = Process.GetProcessesByName("chrome" + i.ToString());
                     foreach (var cp in cps)
                     {
-                        cp.Kill();
+                        //cp.Kill();
+                        cp.CloseMainWindow();
                     }
-                    Thread.Sleep(5000);
+                    Thread.Sleep(2000);
                     Process.Start("C:\\work\\Chrome" + i.ToString() + "\\chrome" + i.ToString() + ".exe");
+                    Thread.Sleep(3000);
                 }
 
             }

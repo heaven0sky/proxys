@@ -56,7 +56,8 @@ function get_ips() {
                         }
                     });
                     set_proxy(row[0], row[1]);
-                    chrome.tabs.reload(cur_tab, function() {});
+                    chrome.tabs.update(cur_tab, {url: "about:blank"}, function(tab){});
+                    chrome.tabs.update(cur_tab, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
                 }
             }
         },
