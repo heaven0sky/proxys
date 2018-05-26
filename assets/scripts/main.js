@@ -33,8 +33,8 @@ function init() {
     get_ips();
     setTimeout(function(){
         get_ips();
-        setTimeout(arguments.callee,5000);
-    },5000)
+        setTimeout(arguments.callee,6000);
+    },6000)
 }
 
 function get_ips() {
