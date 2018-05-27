@@ -17,7 +17,7 @@ namespace RunBlink
         public Form1()
         {
             InitializeComponent();
-            browserControl.GlobalObjectJs = this;
+            //browserControl.GlobalObjectJs = this;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,6 +35,7 @@ namespace RunBlink
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/ips");
                 request.Method = "GET";
+                request.Timeout = 10000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
@@ -43,6 +44,12 @@ namespace RunBlink
                 myResponseStream.Close();
                 //browserControl
 
+                if (browserControl.handle == IntPtr.Zero)
+                {
+                    return;
+                }
+
+                Console.WriteLine(retString);
                 if (retString.Length <=0)
                 {
                     return;
@@ -53,7 +60,8 @@ namespace RunBlink
                 proxy.hostname = sArray[0];
                 proxy.port = ushort.Parse(sArray[1]);           
                 BlinkBrowserPInvoke.wkeSetProxyWrap(proxy);
-                BlinkBrowserPInvoke.wkeReload(browserControl.handle);
+                BlinkBrowserPInvoke.wkeStopLoading(browserControl.handle);
+                browserControl.Url = "http://www.hao123.com/?tn=90384165_hao_pg";
             }
             catch (Exception ex)
             {

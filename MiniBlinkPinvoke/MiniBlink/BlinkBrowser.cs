@@ -193,6 +193,7 @@ namespace MiniBlinkPinvoke
             {
                 Console.WriteLine("call OnwkeLoadingFinishCallback 加载失败 failedReason:" + wkeGetString(failedReason).Utf8IntptrToString());
                 HTML = "<h1>" + wkeGetString(failedReason).Utf8IntptrToString() + "</h1>";
+                wkeReload(webView);
             }
             else
             {

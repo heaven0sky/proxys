@@ -609,7 +609,6 @@ namespace MiniBlinkPinvoke
         [DllImport(BlinkBrowserdll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkeWindowOnPaint(IntPtr webView, IntPtr bits, int pitch);
 
-
         [DllImport(BlinkBrowserdll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkeFinalize();
 
