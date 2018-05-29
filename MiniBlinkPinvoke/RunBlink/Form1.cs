@@ -23,19 +23,29 @@ namespace RunBlink
         private void Form1_Load(object sender, EventArgs e)
         {
             browserControl.Url = "http://www.hao123.com/?tn=90384165_hao_pg";
+            //BlinkBrowserPInvoke.wkeSetHeadlessEnabled(browserControl.handle, true);
             Timer timer1 = new Timer();
-            timer1.Interval = 10000;
+            timer1.Interval = 7000;
             timer1.Enabled = true;
-            timer1.Tick += new EventHandler(timer1EventProcessor);//添加事件
+            timer1.Tick += new EventHandler(timer1EventProcessor);
+
+            //_wkeConsoleMessageCallback = OnwkeConsoleMessageCallback;
+            //BlinkBrowserPInvoke.wkeOnConsole(browserControl.handle, _wkeConsoleMessageCallback, IntPtr.Zero);
+            RunTimer();
         }
 
         public void timer1EventProcessor(object source, EventArgs e)
+        {
+            RunTimer();
+        }
+
+        public void RunTimer()
         {
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/ips");
                 request.Method = "GET";
-                request.Timeout = 10000;
+                request.Timeout = 7000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
@@ -50,24 +60,48 @@ namespace RunBlink
                 }
 
                 Console.WriteLine(retString);
-                if (retString.Length <=0)
+                if (retString.Length <= 0)
                 {
                     return;
                 }
                 string[] sArray = retString.Split(':');
-                wkeProxy proxy = new wkeProxy();
-                proxy.type = wkeProxyType.WKE_PROXY_HTTP;
-                proxy.hostname = sArray[0];
-                proxy.port = ushort.Parse(sArray[1]);           
-                BlinkBrowserPInvoke.wkeSetProxyWrap(proxy);
+                wkeProxy proxy = new wkeProxy
+                {
+                    type = wkeProxyType.WKE_PROXY_HTTP,
+                    hostname = sArray[0],
+                    port = ushort.Parse(sArray[1])
+                };
+                BlinkBrowserPInvoke.wkeSetViewProxyWrap(browserControl.handle, proxy);
                 BlinkBrowserPInvoke.wkeStopLoading(browserControl.handle);
                 browserControl.Url = "http://www.hao123.com/?tn=90384165_hao_pg";
+                //BlinkBrowserPInvoke.wkeLoadURLW(browserControl.handle, "http://www.hao123.com/?tn=90384165_hao_pg");
             }
+            catch (WebException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                //runTimer();
+                return;
+            } 
             catch (Exception ex)
             {
                 return;
             }
-            
+        }
+
+        wkeConsoleMessageCallback _wkeConsoleMessageCallback;
+        void OnwkeConsoleMessageCallback(IntPtr webView, IntPtr param, wkeConsoleLevel level, IntPtr message, IntPtr sourceName, int sourceLine, IntPtr stackTrace)
+        {
+            //Console.WriteLine("My Console :" + level);
+            string consoleStr = BlinkBrowserPInvoke.wkeGetString(message).Utf8IntptrToString();
+            Console.WriteLine("Console Msg:" + BlinkBrowserPInvoke.wkeGetString(message).Utf8IntptrToString());
+            /*if (consoleStr.IndexOf("创造酷炫hao123") >= 0)
+            {
+                runTimer();
+            }*/
+            Console.WriteLine("Console Msg:" + BlinkBrowserPInvoke.wkeGetString(message).Utf8IntptrToString());
+            //Console.WriteLine("Console sourceName:" + wkeGetString(sourceName).Utf8IntptrToString());
+            //Console.WriteLine("Console stackTrace:" + wkeGetString(stackTrace).Utf8IntptrToString());
+            //Console.WriteLine("Console sourceLine:" + sourceLine);
         }
     }
 }

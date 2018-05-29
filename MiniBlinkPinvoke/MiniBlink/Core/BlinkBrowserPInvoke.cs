@@ -463,6 +463,17 @@ namespace MiniBlinkPinvoke
         }
 
         [DllImport(BlinkBrowserdll, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void wkeSetViewProxy(IntPtr webView, IntPtr proxy);
+        public static void wkeSetViewProxyWrap(IntPtr webView, wkeProxy wkeProxy)
+        {
+            int nSizeOfSettings = Marshal.SizeOf(wkeProxy);
+            IntPtr intPtr = Marshal.AllocHGlobal(nSizeOfSettings);
+            Marshal.StructureToPtr(wkeProxy, intPtr, true);
+            BlinkBrowserPInvoke.wkeSetViewProxy(webView, intPtr);
+            Marshal.DestroyStructure(intPtr, typeof(wkeProxy));
+        }
+
+        [DllImport(BlinkBrowserdll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkeEditorSelectAll(IntPtr webView);
         [return: MarshalAs(UnmanagedType.I1)]
         [DllImport(BlinkBrowserdll, CallingConvention = CallingConvention.Cdecl)]

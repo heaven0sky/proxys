@@ -14,8 +14,8 @@ namespace RunBlink
         [STAThread]
         static void Main()
         {
-            AppDomain.CurrentDomain.UnhandledException +=
-                    new UnhandledExceptionEventHandler(UnhandledExceptionEventHandler);
+            //AppDomain.CurrentDomain.UnhandledException +=
+            //        new UnhandledExceptionEventHandler(UnhandledExceptionEventHandler);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
