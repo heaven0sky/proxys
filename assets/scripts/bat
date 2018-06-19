@@ -1,0 +1,104 @@
+rd /s /q C:/work/miniblink1
+md C:/work/miniblink1
+xcopy  folder1  C:/work/miniblink1 /E
+ren C:/work/miniblink1/miniblink.exe C:/work/miniblink1/miniblink1.exe
+
+rd /s /q C:/work/miniblink2
+md C:/work/miniblink2
+xcopy  folder1  C:/work/miniblink2 /E
+ren C:/work/miniblink2/miniblink.exe C:/work/miniblink2/miniblink2.exe
+
+rd /s /q C:/work/miniblink3
+md C:/work/miniblink3
+xcopy  folder1  C:/work/miniblink3 /E
+ren C:/work/miniblink3/miniblink.exe C:/work/miniblink3/miniblink3.exe
+
+rd /s /q C:/work/miniblink4
+md C:/work/miniblink4
+xcopy  folder1  C:/work/miniblink4 /E
+ren C:/work/miniblink4/miniblink.exe C:/work/miniblink4/miniblink4.exe
+
+rd /s /q C:/work/miniblink5
+md C:/work/miniblink5
+xcopy  folder1  C:/work/miniblink5 /E
+ren C:/work/miniblink5/miniblink.exe C:/work/miniblink5/miniblink5.exe
+
+rd /s /q C:/work/miniblink6
+md C:/work/miniblink6
+xcopy  folder1  C:/work/miniblink6 /E
+ren C:/work/miniblink6/miniblink.exe C:/work/miniblink6/miniblink6.exe
+
+rd /s /q C:/work/miniblink7
+md C:/work/miniblink7
+xcopy  folder1  C:/work/miniblink7 /E
+ren C:/work/miniblink7/miniblink.exe C:/work/miniblink7/miniblink7.exe
+
+rd /s /q C:/work/miniblink8
+md C:/work/miniblink8
+xcopy  folder1  C:/work/miniblink8 /E
+ren C:/work/miniblink8/miniblink.exe C:/work/miniblink8/miniblink8.exe
+
+rd /s /q C:/work/miniblink9
+md C:/work/miniblink9
+xcopy  folder1  C:/work/miniblink9 /E
+ren C:/work/miniblink9/miniblink.exe C:/work/miniblink1/miniblink9.exe
+
+rd /s /q C:/work/miniblink10
+md C:/work/miniblink10
+xcopy  folder1  C:/work/miniblink10 /E
+ren C:/work/miniblink10/miniblink.exe C:/work/miniblink10/miniblink10.exe
+
+rd /s /q C:/work/miniblink11
+md C:/work/miniblink11
+xcopy  folder1  C:/work/miniblink11 /E
+ren C:/work/miniblink11/miniblink.exe C:/work/miniblink11/miniblink11.exe
+
+rd /s /q C:/work/miniblink12
+md C:/work/miniblink12
+xcopy  folder1  C:/work/miniblink12 /E
+ren C:/work/miniblink12/miniblink.exe C:/work/miniblink12/miniblink12.exe
+
+rd /s /q C:/work/miniblink13
+md C:/work/miniblink13
+xcopy  folder1  C:/work/miniblink13 /E
+ren C:/work/miniblink13/miniblink.exe C:/work/miniblink13/miniblink13.exe
+
+rd /s /q C:/work/miniblink14
+md C:/work/miniblink14
+xcopy  folder1  C:/work/miniblink14 /E
+ren C:/work/miniblink14/miniblink.exe C:/work/miniblink14/miniblink14.exe
+
+rd /s /q C:/work/miniblink15
+md C:/work/miniblink15
+xcopy  folder1  C:/work/miniblink15 /E
+ren C:/work/miniblink15/miniblink.exe C:/work/miniblink15/miniblink15.exe
+
+rd /s /q C:/work/miniblink16
+md C:/work/miniblink16
+xcopy  folder1  C:/work/miniblink16 /E
+ren C:/work/miniblink16/miniblink.exe C:/work/miniblink16/miniblink16.exe
+
+rd /s /q C:/work/miniblink17
+md C:/work/miniblink17
+xcopy  folder1  C:/work/miniblink17 /E
+ren C:/work/miniblink17/miniblink.exe C:/work/miniblink17/miniblink17.exe
+
+rd /s /q C:/work/miniblink18
+md C:/work/miniblink18
+xcopy  folder1  C:/work/miniblink18 /E
+ren C:/work/miniblink18/miniblink.exe C:/work/miniblink18/miniblink18.exe
+
+rd /s /q C:/work/miniblink19
+md C:/work/miniblink19
+xcopy  folder1  C:/work/miniblink19 /E
+ren C:/work/miniblink19/miniblink.exe C:/work/miniblink19/miniblink19.exe
+
+rd /s /q C:/work/miniblink20
+md C:/work/miniblink20
+xcopy  folder1  C:/work/miniblink20 /E
+ren C:/work/miniblink20/miniblink.exe C:/work/miniblink20/miniblink20.exe
+
+rd /s /q C:/work/miniblink21
+md C:/work/miniblink21
+xcopy  folder1  C:/work/miniblink21 /E
+ren C:/work/miniblink21/miniblink.exe C:/work/miniblink21/miniblink21.exe
