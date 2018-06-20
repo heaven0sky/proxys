@@ -36,8 +36,8 @@ function init() {
     get_ips();
     setTimeout(function(){
         get_ips();
-        setTimeout(arguments.callee,7000);
-    },7000)
+        setTimeout(arguments.callee,6000);
+    },6000)
 }
 
 function get_ips() {
@@ -80,7 +80,7 @@ function get_ips() {
         complete: function(xhr, ts){
             xhr = null;
         },
-        timeout: 7000 //in milliseconds
+        timeout: 6000 //in milliseconds
     });
 
     request.onreadystatechange = noop;
