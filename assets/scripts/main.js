@@ -18,17 +18,17 @@
 
 var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
-var cur_tab;
+var cur_tab_hao;
+var cur_tab_sogou;
 var flag = true;
 var count = 0;
 
 function init() {
-    chrome.tabs.query({},function(tabs){
-        console.log(tabs);
-        if(tabs.length > 0) {
-            cur_tab = tabs[0].id;
-            chrome.tabs.update(cur_tab,{url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
-        }
+    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
+        cur_tab_hao = tab.id;
+    });
+    chrome.tabs.create({url: "https://123.sogou.com/?Af11704"}, function (tab) {
+        cur_tab_sogou = tab.id;
     });
     get_ips();
     setTimeout(function(){
@@ -55,9 +55,22 @@ function get_ips() {
                             }, function () {});
                         }
                     });
+
+                    chrome.cookies.getAll({url: "https://123.sogou.com/?Af11704"}, function (cookies) {
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i];
+                            chrome.cookies.remove({
+                                url: "https://123.sogou.com/?Af11704",
+                                name: cookie.name
+                            }, function () {});
+                        }
+                    });
                     set_proxy(row[0], row[1]);
-                    chrome.tabs.update(cur_tab, {url: "about:blank"}, function(tab){});
-                    chrome.tabs.update(cur_tab, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
+                    chrome.tabs.update(cur_tab_hao, {url: "about:blank"}, function(tab){});
+                    chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
+
+                    chrome.tabs.update(cur_tab_sogou, {url: "about:blank"}, function(tab){});
+                    chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?Af11704"}, function(tab){});
                 }
             }
         },
