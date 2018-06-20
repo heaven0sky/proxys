@@ -24,8 +24,11 @@ var flag = true;
 var count = 0;
 
 function init() {
-    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
-        cur_tab_hao = tab.id;
+    chrome.tabs.query({},function(tabs){
+        if(tabs.length > 0) {
+            cur_tab_hao = tabs[0].id;
+            chrome.tabs.update(cur_tab,{url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
+        }
     });
     chrome.tabs.create({url: "https://123.sogou.com/?11704"}, function (tab) {
         cur_tab_sogou = tab.id;
