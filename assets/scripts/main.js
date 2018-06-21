@@ -13,11 +13,19 @@ function init() {
     chrome.tabs.create({url: "https://123.sogou.com/?11704"}, function (tab) {
         cur_tab_sogou = tab.id;
     });
-    //get_ips();
+    get_ips();
     setTimeout(function(){
-        //get_ips();
+        get_ips();
+        chrome.tabs.query({}, function (tabs){
+            tabs.forEach(tab => {
+                console.log(tab.id);
+                if((tab.id != cur_tab_hao) && (tab.id != cur_tab_sogou)) {
+                    chrome.tabs.remove(tab.id, function (){});
+                }
+            });
+        });
         setTimeout(arguments.callee,7000);
-    },7000)
+    },7000);
 }
 
 function get_ips() {
@@ -49,10 +57,8 @@ function get_ips() {
                         }
                     });
                     set_proxy(row[0], row[1]);
-                    chrome.tabs.update(cur_tab_hao, {url: "about:blank"}, function(tab){});
                     chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
 
-                    chrome.tabs.update(cur_tab_sogou, {url: "about:blank"}, function(tab){});
                     chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?11704"}, function(tab){});
                 }
             }
