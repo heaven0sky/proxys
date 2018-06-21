@@ -1,21 +1,3 @@
-/*
- Copyright (c) 2011 Shyc2001 (http://twitter.com/shyc2001)
- This work is based on:
- *"Switchy! Chrome Proxy Manager and Switcher" (by Mohammad Hejazi (mohammadhi at gmail d0t com))
- *"SwitchyPlus" by @ayanamist (http://twitter.com/ayanamist)
- This file is part of SwitchySharp.
- SwitchySharp is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- SwitchySharp is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- You should have received a copy of the GNU General Public License
- along with SwitchySharp.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 var api_url = "http://127.0.0.1:5000/ips"
 var ips = [];
 var cur_tab_hao;
@@ -24,18 +6,19 @@ var flag = true;
 var count = 0;
 
 function init() {
+    use_system_proxy();
     chrome.tabs.query({},function(tabs){
         if(tabs.length > 0) {
             cur_tab_hao = tabs[0].id;
-            chrome.tabs.update(cur_tab,{url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
+            chrome.tabs.update(cur_tab_hao,{url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
         }
     });
     chrome.tabs.create({url: "https://123.sogou.com/?11704"}, function (tab) {
         cur_tab_sogou = tab.id;
     });
-    get_ips();
+    //get_ips();
     setTimeout(function(){
-        get_ips();
+        //get_ips();
         setTimeout(arguments.callee,7000);
     },7000)
 }
@@ -117,6 +100,51 @@ function use_system_proxy() {
 
 var noop = function(){};
 
+function getRandom(arr) {
+    var len = arr.length;
+    var i = Math.ceil(Math.random() * (len ))%len;
+    return arr[i];
+}
+
+var user_agents = ["ozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5478.400 QQBrowser/10.1.1550.400",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 QIHU 360SE", "Mozilla/5.0(Macintosh;U;IntelMacOSX10_6_8;en-us)AppleWebKit/534.50(KHTML,likeGecko)Version/5.1Safari/534.50",
+"Mozilla/5.0(Windows;U;WindowsNT6.1;en-us)AppleWebKit/534.50(KHTML,likeGecko)Version/5.1Safari/534.50","Mozilla/5.0(compatible;MSIE9.0;WindowsNT6.1;Trident/5.0","Mozilla/4.0(compatible;MSIE8.0;WindowsNT6.0;Trident/4.0)",
+"Mozilla/5.0(Macintosh;IntelMacOSX10.6;rv:2.0.1)Gecko/20100101Firefox/4.0.1", "Mozilla/5.0(WindowsNT6.1;rv:2.0.1)Gecko/20100101Firefox/4.0.1","Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;TencentTraveler4.0)",
+"Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;Maxthon2.0)","Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1)","Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;Trident/4.0;SE2.XMetaSr1.0;SE2.XMetaSr1.0;.NETCLR2.0.50727;SE2.XMetaSr1.0)"];
+
+var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+      'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+      'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+
 $(document).ready(function () {
     init();
+
+    var requestFilter = {
+        urls: [
+            "<all_urls>"
+        ]
+    };
+    
+    
+    chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
+        var headers = details.requestHeaders;
+        
+        localStorage['user-agent'] = getRandom(user_agents) + getRandom(arr);
+        if( !localStorage['user-agent'] ) {
+            return;
+        }
+        for(var i = 0, l = headers.length; i < l; ++i) {
+            if( headers[i].name == 'User-Agent' ) {
+                break;
+            }
+        }
+        if(i < headers.length) {
+            headers[i].value = localStorage['user-agent'];
+        }
+        return {requestHeaders: headers};
+    }, requestFilter, ['requestHeaders','blocking']);
+    
 });
