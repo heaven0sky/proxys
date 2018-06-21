@@ -12,5 +12,3 @@ function injectCustomJs(jsPath)
 
 injectCustomJs("assets/libs/jquery-3.2.1.min.js");
 setTimeout("injectCustomJs('assets/scripts/content.js')", Math.random() * 4000);
-setTimeout("injectCustomJs('assets/scripts/content.js')", Math.random() * 4000);
-setTimeout("injectCustomJs('assets/scripts/content.js')", Math.random() * 4000);

@@ -24,8 +24,8 @@ function init() {
                 }
             });
         });
-        setTimeout(arguments.callee,7000);
-    },7000);
+        setTimeout(arguments.callee,10000);
+    },10000);
 }
 
 function get_ips() {
@@ -66,7 +66,7 @@ function get_ips() {
         complete: function(xhr, ts){
             xhr = null;
         },
-        timeout: 7000 //in milliseconds
+        timeout: 10000 //in milliseconds
     });
 
     request.onreadystatechange = noop;
