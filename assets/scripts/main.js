@@ -57,8 +57,8 @@ function get_ips() {
                         }
                     });
                     set_proxy(row[0], row[1]);
+                    resizeWindow();
                     chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
-
                     chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?11704"}, function(tab){});
                 }
             }
@@ -121,6 +121,14 @@ var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
       'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
+
+function resizeWindow() {
+    var width = 1024 + Math.ceil(Math.random() * 800);
+    var height = 700 + Math.ceil(Math.random() * 400);
+    chrome.windows.getCurrent({}, function(win) {
+        chrome.windows.update(win.id, {width: width, height: height}, function (){});
+    });   
+}
 
 $(document).ready(function () {
     init();
