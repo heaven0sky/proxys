@@ -7,11 +7,19 @@ var count = 0;
 
 function init() {
     use_system_proxy();
-    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function (tab) {
+    chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function (tab) {
         cur_tab_hao = tab.id;
     });
-    chrome.tabs.create({url: "https://123.sogou.com/?11704"}, function (tab) {
+    chrome.tabs.create({url: "https://123.sogou.com/?11704", pinned: true, index: 1}, function (tab) {
         cur_tab_sogou = tab.id;
+    });
+    chrome.tabs.query({}, function (tabs){
+        tabs.forEach(tab => {
+            console.log(tab.id);
+            if((tab.id != cur_tab_hao) && (tab.id != cur_tab_sogou)) {
+                chrome.tabs.remove(tab.id, function (){});
+            }
+        });
     });
     get_ips();
     setTimeout(function(){
@@ -24,8 +32,8 @@ function init() {
                 }
             });
         });
-        setTimeout(arguments.callee,10000);
-    },10000);
+        setTimeout(arguments.callee,7000);
+    },7000);
 }
 
 function get_ips() {
@@ -58,8 +66,8 @@ function get_ips() {
                     });
                     set_proxy(row[0], row[1]);
                     resizeWindow();
-                    chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg"}, function(tab){});
-                    chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?11704"}, function(tab){});
+                    chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function(tab){});
+                    chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?11704", pinned: true, index: 1}, function(tab){});
                 }
             }
         },
