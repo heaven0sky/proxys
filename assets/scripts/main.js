@@ -6,7 +6,7 @@ var flag = true;
 var count = 0;
 
 function init() {
-    use_system_proxy();
+    //use_system_proxy();
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function (tab) {
         cur_tab_hao = tab.id;
     });

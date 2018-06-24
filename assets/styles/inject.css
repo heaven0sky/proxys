@@ -7,6 +7,6 @@ a::before {
     position: absolute;
     z-index: 99999;
     width: 200px;
-    height: 200px;
+    height: 60px;
     background: rgba(230, 103, 103, 0.452);
 }

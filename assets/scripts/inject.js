@@ -6,8 +6,8 @@ function injectCustomJs(jsPath)
     temp.setAttribute('type', 'text/javascript');
     // 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
     temp.src = chrome.extension.getURL(jsPath);
-    document.body.appendChild(temp);
+    document.head.appendChild(temp);
     //document.head.insertBefore(temp, docuemnt.head.firstChild);
 }
 
-setTimeout("injectCustomJs('assets/scripts/content.js')", Math.random() * 2000);
+injectCustomJs('assets/scripts/content.js');
