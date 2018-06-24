@@ -66,8 +66,8 @@ function get_ips() {
                     });
                     set_proxy(row[0], row[1]);
                     resizeWindow();
-                    chrome.tabs.update(cur_tab_hao, {url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function(tab){});
-                    chrome.tabs.update(cur_tab_sogou, {url: "https://123.sogou.com/?11704", pinned: true, index: 1}, function(tab){});
+                    chrome.tabs.reload(cur_tab_hao, function(tab){});
+                    chrome.tabs.reload(cur_tab_sogou, function(tab){});
                 }
             }
         },
