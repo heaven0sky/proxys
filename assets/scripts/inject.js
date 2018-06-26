@@ -10,4 +10,5 @@ function injectCustomJs(jsPath)
     //document.head.insertBefore(temp, docuemnt.head.firstChild);
 }
 
+injectCustomJs('assets/libs/jquery-3.2.1.min.js');
 injectCustomJs('assets/scripts/content.js');

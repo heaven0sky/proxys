@@ -6,7 +6,7 @@ var flag = true;
 var count = 0;
 
 function init() {
-    //use_system_proxy();
+    use_system_proxy();
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function (tab) {
         cur_tab_hao = tab.id;
     });
@@ -14,13 +14,15 @@ function init() {
         cur_tab_sogou = tab.id;
     });
     chrome.tabs.query({}, function (tabs){
-        tabs.forEach(tab => {
-            console.log(tab.id);
+        for(var i = 0; i < tabs.length; i++)
+        {
+            var tab = tabs[i];
             if((tab.id != cur_tab_hao) && (tab.id != cur_tab_sogou)) {
                 chrome.tabs.remove(tab.id, function (){});
             }
-        });
+        };
     });
+    /*
     get_ips();
     setTimeout(function(){
         get_ips();
@@ -34,6 +36,7 @@ function init() {
         });
         setTimeout(arguments.callee,7000);
     },7000);
+    */
 }
 
 function get_ips() {

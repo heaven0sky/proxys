@@ -10,3 +10,15 @@ a::before {
     height: 60px;
     background: rgba(230, 103, 103, 0.452);
 }
+
+a#engineBtn {
+    display: block !important;
+    position: fixed !important;
+    background-color: green !important;
+}
+
+input.button-hook{
+    display: block !important;
+    position: fixed !important;
+    background-color: green !important;
+}
