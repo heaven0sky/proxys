@@ -30,5 +30,5 @@ setTimeout(function() {
     $('input.button-hook').css('width','100%');
     $('input.button-hook').css('height','100%');
     $('input.button-hook').css('z-index','999999');
-}, 3000);
+}, 1500);
 
