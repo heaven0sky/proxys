@@ -10,7 +10,7 @@ function init() {
     chrome.tabs.create({url: "http://www.hao123.com/?tn=90384165_hao_pg", pinned: true, index: 0}, function (tab) {
         cur_tab_hao = tab.id;
     });
-    chrome.tabs.create({url: "https://123.sogou.com/?11704", pinned: true, index: 1}, function (tab) {
+    chrome.tabs.create({url: "https://123.sogou.com/?11704-1234", pinned: true, index: 1}, function (tab) {
         cur_tab_sogou = tab.id;
     });
     chrome.tabs.query({}, function (tabs){
@@ -57,11 +57,11 @@ function get_ips() {
                         }
                     });
 
-                    chrome.cookies.getAll({url: "https://123.sogou.com/?11704"}, function (cookies) {
+                    chrome.cookies.getAll({url: "https://123.sogou.com/?11704-1234"}, function (cookies) {
                         for (var i = 0; i < cookies.length; i++) {
                             var cookie = cookies[i];
                             chrome.cookies.remove({
-                                url: "https://123.sogou.com/?11704",
+                                url: "https://123.sogou.com/?11704-1234",
                                 name: cookie.name
                             }, function () {});
                         }
